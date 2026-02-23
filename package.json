@@ -23,13 +23,16 @@
 	"homepage": "https://github.com/Jules-Ferry/Quzah",
 	"readme": "https://github.com/Jules-Ferry/Quzah/src/branch/main/README.md",
 	"dependencies": {
+		"bcryptjs": "^3.0.3",
 		"better-sqlite3": "^12.6.2",
 		"colors": "^1.4.0",
+		"cookie-parser": "^1.4.7",
 		"cors": "^2.8.5",
 		"dotenv": "^17.2.3",
 		"express": "^5.2.1",
 		"helmet": "^8.1.0",
 		"hpp": "^0.2.3",
+		"jsonwebtoken": "^9.0.3",
 		"path-to-regexp": "^8.3.0",
 		"zod": "^4.2.0"
 	},

@@ -9,11 +9,17 @@ const helmet = require("helmet")
 const loader = require("./modules/loader")
 const DefaultError = require("./errors/DefaultError")
 const path2regex = require("path-to-regexp")
+const cookiesParser = require("cookie-parser")
+const database = require("./modules/database")
+
+database.initialize()
 
 const routes = loader.getRecursiveFiles(path.join(__dirname, "routes"))
 const schemas = loader.getRecursiveFiles(path.join(__dirname, "schemas"))
 
 const schemaRegistry = {}
+
+app.use(cookiesParser())
 
 app.use(hpp())
 app.use(helmet())
