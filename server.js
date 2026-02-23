@@ -154,5 +154,5 @@ app.use((err, req, res, next) => {
 })
 
 app.listen(process.env.WEB_PORT || 3000, () => {
-    logger.log(`Server listening at port : ${process.env.WEB_PORT || 3000}`, ["WEB", "yellow"])
+    logger.log(`Server listening at port : ${process.env.WEB_PORT.bold || 3000}`, ["WEB", "yellow"])
 })

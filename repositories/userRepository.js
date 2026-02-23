@@ -8,6 +8,7 @@ function registerUser(username, password) {
         stmt.run(username, password)
         return { status: 200 }
     } catch (error) {
+        console.log(error)
         throw new DefaultError(500, "Please contact an administrator", "SQLite", "InternalServerErrorException")
     }
 }
@@ -26,7 +27,7 @@ function getUserById(userId, needPassword = false) {
 }
 
 function getUserByName(username, needPassword = false) {
-    const stmt = db.prepare("SELECT * FROM users WHERE id = ?")
+    const stmt = db.prepare("SELECT * FROM users WHERE username = ?")
     const user = stmt.get(username)
     if (user) {
         if (!needPassword) {

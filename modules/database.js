@@ -11,9 +11,7 @@ function initialize() {
         fs.mkdirSync(datadir, { recursive: true })
     }
 
-    const db = new Database(path.join(datadir, "quzah.db"), { 
-        verbose: (message) => logger.log(message, ["SQLite", "yellow"]) 
-    })
+    const db = new Database(path.join(datadir, "quzah.db"))
 
     db.pragma("foreign_keys = ON")
     db.pragma("journal_mode = WAL")
