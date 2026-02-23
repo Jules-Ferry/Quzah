@@ -1,0 +1,42 @@
+{
+	"name": "quazh",
+	"version": "0.0.1-alpha",
+	"description": "",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Jules-Ferry/Quzah"
+	},
+	"license": "AGPL-3.0-only",
+	"author": {
+		"name": "Azures04",
+		"url": "https://github.com/Jules-Ferry/Quzah",
+		"email": "gilleslazure04@gmail.com"
+	},
+	"type": "commonjs",
+	"main": "server.js",
+	"scripts": {
+		"start:dev": "nodemon .",
+		"start": "node .",
+		"lint": "eslint .",
+		"lint:fix": "eslint . --fix"
+	},
+	"homepage": "https://github.com/Jules-Ferry/Quzah",
+	"readme": "https://github.com/Jules-Ferry/Quzah/src/branch/main/README.md",
+	"dependencies": {
+		"better-sqlite3": "^12.6.2",
+		"colors": "^1.4.0",
+		"cors": "^2.8.5",
+		"dotenv": "^17.2.3",
+		"express": "^5.2.1",
+		"helmet": "^8.1.0",
+		"hpp": "^0.2.3",
+		"path-to-regexp": "^8.3.0",
+		"zod": "^4.2.0"
+	},
+	"devDependencies": {
+		"@eslint/js": "^9.39.2",
+		"eslint": "^9.39.2",
+		"globals": "^16.5.0",
+		"nodemon": "^3.1.11"
+	}
+}
