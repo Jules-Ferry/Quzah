@@ -79,6 +79,15 @@ function initialize() {
             FOREIGN KEY (clientId) REFERENCES clients(id) ON DELETE CASCADE,
             FOREIGN KEY (scopeId) REFERENCES scopes(id) ON DELETE CASCADE
         );
+
+        CREATE TABLE IF NOT EXISTS userPermissions (
+            userId INTEGER NOT NULL,
+            permission TEXT NOT NULL,
+            PRIMARY KEY (userId, permission),
+            FOREIGN KEY (userId) REFERENCES users(id) ON DELETE CASCADE
+        );
+
+        CREATE INDEX IF NOT EXISTS idx_user_permissions ON userPermissions(userId);
     `)
     databaseInstance = db
 }

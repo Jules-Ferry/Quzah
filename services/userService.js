@@ -86,9 +86,19 @@ async function isLogged(req, res, next) {
     }
 }
 
+async function getUserById(id) {
+    return userRepository.getUserById(id)
+}
+
+async function getUserByName(name) {
+    return userRepository.getUserByName(name)
+}
+
 module.exports = {
     isLogged,
     register,
+    getUserById,
+    getUserByName,
     loginWithToken,
     loginAndMakeToken,
     loginWithCredentials,
