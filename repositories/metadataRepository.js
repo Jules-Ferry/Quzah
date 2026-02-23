@@ -8,6 +8,9 @@ function add(table, id, label) {
         stmt.run(id, label)
         return { status: 200 }
     } catch (error) {
+        if (error.message == "UNIQUE constraint failed: structures.id") {
+            throw new DefaultError(409, "Duplicated entry", "SQLite", "UniqueConstraintException")
+        }
         throw new DefaultError(500, "Please contact an administrator", "SQLite", "InternalServerErrorException")
     }
 }
@@ -15,7 +18,7 @@ function add(table, id, label) {
 function rename(table, id, newLabel) {
     const stmt = db.prepare(`UPDATE ${table} SET label = ? WHERE id = ?`)
     try {
-        stmt.run(newLabel, id)
+        const result = stmt.run(newLabel, id)
         if (result.changes > 0) {
             return { status: 200 }
         } else {
@@ -29,19 +32,22 @@ function rename(table, id, newLabel) {
 function remove(table, id) {
     const stmt = db.prepare(`DELETE FROM ${table} WHERE id = ?`)
     try {
-        stmt.run(id)
+        const result = stmt.run(id)
         if (result.changes > 0) {
             return { status: 200 }
         } else {
-            throw new DefaultError(500, "Please contact an administrator", "SQLite", "InternalServerErrorException")
+            throw new DefaultError(404, "Not exists", "Data not found", "NotFoundException")
         }
     } catch (error) {
+        if (error instanceof DefaultError) {
+            throw error
+        }
         throw new DefaultError(500, "Please contact an administrator", "SQLite", "InternalServerErrorException")
     }
 }
 
 function getById(table, id) {
-    const stmt = db.prepare(`SELECT 1 FROM ${table} WHERE id = ?`)
+    const stmt = db.prepare(`SELECT * FROM ${table} WHERE id = ?`)
     try {
         const result = stmt.get(id)
         if (result) {
@@ -55,7 +61,7 @@ function getById(table, id) {
 }
 
 function getByName(table, name) {
-    const stmt = db.prepare(`SELECT 1 FROM ${table} WHERE name = ?`)
+    const stmt = db.prepare(`SELECT * FROM ${table} WHERE label = ?`)
     try {
         const result = stmt.get(name)
         if (result) {

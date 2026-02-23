@@ -51,13 +51,13 @@ async function loginAndMakeToken({ username, password }) {
         username: result.user.username,
     }
 
-    const token = jwt.sign(payload, process.env.JWT_SECRET, { algorithm: "RS256", issuer: "Quzah/1.0", expiresIn: "24h" })
+    const token = jwt.sign(payload, process.env.JWT_SECRET, { issuer: "Quzah/1.0", expiresIn: "24h" })
     return token
 }
 
 async function loginWithToken({ token }) {
     try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET, { algorithms: ["RS256"], issuer: "Quzah/1.0" })
+        const decoded = jwt.verify(token, process.env.JWT_SECRET, { issuer: "Quzah/1.0" })
         return decoded
     } catch (error) {
         throw new DefaultError(401, "Bad credentials.", "Invalid Token.", "InvalidCredentialsException")

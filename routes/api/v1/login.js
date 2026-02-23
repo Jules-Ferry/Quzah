@@ -6,10 +6,10 @@ router.post("/", async (req, res) => {
     const { username, password } = req.body
     if (req.accepts("html")) {
         const loginResult = await userService.loginAndMakeToken({ username, password })
-        return res.status(200).json(loginResult).cookie("quzah-bearer", loginResult)
+        return res.status(200).cookie("quzah-bearer", loginResult).send()
     } else {
-        const loginResult = await userService.login({ username, password })
-        return res.status(200).json(loginResult)
+        const loginResult = await userService.loginAndMakeToken({ username, password })
+        return res.status(200).json({ token: loginResult })
     }
 })
 

@@ -5,36 +5,36 @@ const metadataService = require("../../../../services/metadataService")
 
 router.put("/", userService.isLogged, async (req, res) => {
     const { id, label } = req.body
-    const result = await metadataService.addStructure(id, label)
-    return res.status(result.status)
+    const result = await metadataService.addUserType(id, label)
+    return res.status(result.status).send()
 })
 
 router.patch("/", userService.isLogged, async (req, res) => {
     const { id, label } = req.body
-    const result = await metadataService.renameStructure(id, label)
-    return res.status(result.status)
+    const result = await metadataService.renameUserType(id, label)
+    return res.status(result.status).send()
 })
 
 router.delete("/", userService.isLogged, async (req, res) => {
     const { id } = req.body
-    const result = await metadataService.removeStructure(id)
-    return res.status(result.status)
+    const result = await metadataService.removeUserType(id)
+    return res.status(result.status).send()
 })
 
-router.get("/:id", userService.isLogged, async (req, res) => {
+router.get("/id/:id", userService.isLogged, async (req, res) => {
     const { id } = req.params
-    const result = await metadataService.getStructureById(id)
+    const result = await metadataService.getUserTypeById(id)
     return res.status(result.status).json(result.data)
 })
 
-router.get("/:name", userService.isLogged, async (req, res) => {
+router.get("/name/:name", userService.isLogged, async (req, res) => {
     const { name } = req.params
-    const result = await metadataService.getStructureByName(name)
+    const result = await metadataService.getUserTypeByName(name)
     return res.status(result.status).json(result.data)
 })
 
 router.get("/", userService.isLogged, async (req, res) => {
-    const result = await metadataService.getStructures()
+    const result = await metadataService.getUserTypes()
     return res.status(result.status).json(result.data)
 })
 

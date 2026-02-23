@@ -133,3 +133,6 @@ dist
 #logs
 logs
 /data
+
+#quzah
+*.rest

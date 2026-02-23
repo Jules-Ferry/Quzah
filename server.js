@@ -101,13 +101,14 @@ app.all(/.*/, (req, res, next) => {
     }
 
     if (dataSchema) {
-        const result = dataSchema.safeParse(dataToValidate)
+        const result = dataSchema.safeParse(dataToValidate);
         if (!result.success) {
-            return utils.sendValidationError(req, res, result, validationType, currentPath, errorConfig)
+            return utils.sendValidationError(req, res, result, validationType, currentPath, errorConfig);
         }
+        
         if (validationType === "query") {
             req.query = result.data
-        } else {
+        } else if (result.data) {
             req.body = result.data
         }
     }
@@ -123,7 +124,7 @@ for (const route of routes) {
             for (const layer of router.stack) {
                 if (layer.route && layer.route.methods) {
                     const method = Object.keys(layer.route.methods).join(", ").toUpperCase()
-                    const subPath = routePath === "/" ? "" : routePath
+                    const subPath = routePath === "/" ? "" : routePath + layer.route.path
                     logger.log(`${method.cyan} ${subPath.cyan.bold} route registered`, ["WEB", "yellow"])
                 }
             }
