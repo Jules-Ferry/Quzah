@@ -20,9 +20,20 @@ const schemas = loader.getRecursiveFiles(path.join(__dirname, "schemas"))
 const schemaRegistry = {}
 
 app.use(cookiesParser())
-
 app.use(hpp())
-app.use(helmet())
+app.use(
+    helmet({
+        contentSecurityPolicy: {
+            directives: {
+                "default-src": ["'self'"],
+                "script-src": ["'self'", "https://cdn.jsdelivr.net"],
+                "style-src": ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com", "https://cdn.jsdelivr.net"],
+                "font-src": ["'self'", "https://fonts.gstatic.com", "https://cdn.jsdelivr.net"],
+                "script-src-attr": ["'unsafe-inline'"],
+            },
+        },
+    })
+)
 app.use(cors({ origin: "*" }))
 
 app.use(express.json())

@@ -1,0 +1,92 @@
+article.frame.login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+article.frame.login > form {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    background-color: #1b2131;
+    width: min-content;
+    padding: 17px 37px 17px 37px;
+    border-radius: 5px;
+    border: 1px solid #0e111a;
+}
+
+article.frame.login > form > input:last-of-type {
+    margin-bottom: 20px;
+}
+
+article.frame.login > form > h2 {
+    font-weight: 500;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+}
+
+article.frame.login > form > button {
+    margin-left: auto;
+}
+
+details {
+    width: 96%;
+    min-height: 84px;
+    color: #cecece;
+    cursor: pointer;
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    border-radius: 10px;
+    background: #1b2131;
+    border: 1px solid #0e111a;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+}
+
+details:nth-of-type(1) {
+    margin-top: 20px;
+}
+
+details > summary {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    flex-direction: row;
+}
+
+details > summary > div > i {
+    font-size: 46px;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+details > summary > div {
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+details > summary > div > h2 {
+    font-size: 17px;
+}
+
+details > summary > div > h3 {
+    font-size: 12px;
+    font-weight: 400;
+}
+
+details > div {
+    cursor: default;
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-bottom: 20px;
+}
+
+details > div > p {
+    font-size: 12px;
+}

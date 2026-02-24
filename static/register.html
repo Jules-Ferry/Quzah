@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/common.css">
+    <link rel="stylesheet" href="./assets/css/login.css">
+    <title>Document</title>
+</head>
+<body>
+    <main>
+        <nav>
+            <img src="./assets/img/quzah_dark.png" alt="">
+            <section class="buttons">
+                <button page="/">
+                    <i class="fas fa-home"></i>
+                    Acceuil
+                </button>
+                <button page="/login">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Connexion
+                </button>
+                <button page="/register">
+                    <i class="fas fa-clipboard-user"></i>
+                    Inscription
+                </button>
+                <button page="/about">
+                    <i class="fas fa-info-circle"></i>
+                    Informations
+                </button>
+            </section>
+        </nav>
+        <article class="frame login">
+            <form action="/api/v1/register" method="post">
+                <h2>
+                    Inscription sur <span class="quzah">Quzah</span>
+                </h2>
+                <input type="text" name="username" id="username" placeholder="Nom d'utilisateur">
+                <br>
+                <input type="password" name="password" id="password" placeholder="Mot de passe">
+                <br>
+                <button class="primary">
+                    <i class="fas fa-clipboard-user"></i>
+                    S'inscrire
+                </button>
+            </form>
+        </article>
+    </main>
+    <script src="./assets/js/common.js"></script>
+
+</body>
+</html>

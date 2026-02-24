@@ -3,7 +3,9 @@ const z = require("zod")
 module.exports = {
     POST: {
         headers: z.object({
-            "content-type": z.string().regex(/application\/json/i).optional()
+            "content-type": z.string()
+                .regex(/application\/json|application\/x-www-form-urlencoded/i)
+                .optional()
         }),
         body: z.object({
             username: z.string()
