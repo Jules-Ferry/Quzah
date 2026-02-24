@@ -39,8 +39,56 @@ function getUserByName(username, needPassword = false) {
     }
 }
 
+function removeUser(userId) {
+    const stmt = db.prepare(`DELETE FROM users WHERE id = ?`)
+    try {
+        const result = stmt.run(userId)
+        if (result.changes > 0) {
+            return { status: 200 }
+        } else {
+            throw new DefaultError(404, "Not exists", "Data not found", "NotFoundException")
+        }
+    } catch (error) {
+        if (error instanceof DefaultError) {
+            throw error
+        }
+        throw new DefaultError(500, "Please contact an administrator", "SQLite", "InternalServerErrorException")
+    }
+}
+
+function renameUser(id, newUsername) {
+    const stmt = db.prepare(`UPDATE users SET username = ? WHERE id = ?`)
+    try {
+        const result = stmt.run(newUsername, id)
+        if (result.changes > 0) {
+            return { status: 200 }
+        } else {
+            throw new DefaultError(500, "Please contact an administrator", "SQLite", "InternalServerErrorException")
+        }
+    } catch (error) {
+        throw new DefaultError(500, "Please contact an administrator", "SQLite", "InternalServerErrorException")
+    }
+}
+
+function changePassword(id, hashedPassword) {
+    const stmt = db.prepare(`UPDATE users SET password = ? WHERE id = ?`)
+    try {
+        const result = stmt.run(hashedPassword, id)
+        if (result.changes > 0) {
+            return { status: 200 }
+        } else {
+            throw new DefaultError(500, "Please contact an administrator", "SQLite", "InternalServerErrorException")
+        }
+    } catch (error) {
+        throw new DefaultError(500, "Please contact an administrator", "SQLite", "InternalServerErrorException")
+    }
+}
+
 module.exports = {
+    renameUser,
+    removeUser,
     getUserById,
     registerUser,
-    getUserByName
+    getUserByName,
+    changePassword
 }

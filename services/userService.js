@@ -94,11 +94,27 @@ async function getUserByName(name) {
     return userRepository.getUserByName(name)
 }
 
+async function renameUser(id, newUsername) {
+    return userRepository.renameUser(id, newUsername)
+}
+
+async function removeUser(id) {
+    return userRepository.removeUser(id)
+}
+
+async function changePassword(id, password) {
+    const hashedPassword = await bcrypt.hash(password, 10)
+    return userRepository.changePassword(id, hashedPassword)
+}
+
 module.exports = {
     isLogged,
     register,
+    removeUser,
+    renameUser,
     getUserById,
     getUserByName,
+    changePassword,
     loginWithToken,
     loginAndMakeToken,
     loginWithCredentials,
