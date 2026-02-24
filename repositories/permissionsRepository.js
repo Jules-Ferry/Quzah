@@ -51,7 +51,7 @@ function listUserPermissions(userId) {
     const stmt = db.prepare("SELECT permission FROM userPermissions WHERE userId = ?")
     try {
         const perms = stmt.all(userId)
-        return { code: 200, permissions: perms.map(p => p.permission) }
+        return { status: 200, permissions: perms.map(p => p.permission) }
     } catch (error) {
         throw new DefaultError(500, "Could not list permissions", "SQLite", "InternalServerErrorException")
     }
