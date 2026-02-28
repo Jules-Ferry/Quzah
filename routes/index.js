@@ -12,16 +12,6 @@ router.get("/", async (req, res) => {
     return res.sendFile(file)
 })
 
-router.get("/login", async (req, res) => {
-    const file = await fileService.serveFile("login.html")
-    return res.sendFile(file)
-})
-
-router.get("/register", async (req, res) => {
-    const file = await fileService.serveFile("register.html")
-    return res.sendFile(file)
-})
-
 router.get("/about", async (req, res) => {
     const file = await fileService.serveFile("about.html")
     return res.sendFile(file)
