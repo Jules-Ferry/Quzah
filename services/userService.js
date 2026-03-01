@@ -86,6 +86,33 @@ async function isLogged(req, res, next) {
     }
 }
 
+async function isNotLogged(req, res, next) {
+    let token = null
+    
+    if (req.cookies && req.cookies["quzah-bearer"]) {
+        token = req.cookies["quzah-bearer"]
+    } else if (req.headers.authorization && req.headers.authorization.startsWith("Bearer ")) {
+        token = req.headers.authorization.split(" ")[1]
+    }
+
+    if (!token) {
+        return next()
+    }
+
+    try {
+        await loginWithToken({ token })
+        
+        if (req.accepts('html')) {
+            return res.redirect("/dashboard")
+        }
+
+        return next(new DefaultError(403, "You are already logged in.", "Session active", "AlreadyAuthenticatedException"))
+
+    } catch (error) {
+        return next()
+    }
+}
+
 async function getUserById(id) {
     return userRepository.getUserById(id)
 }
@@ -113,6 +140,7 @@ module.exports = {
     removeUser,
     renameUser,
     getUserById,
+    isNotLogged,
     getUserByName,
     changePassword,
     loginWithToken,
